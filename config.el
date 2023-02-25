@@ -115,3 +115,5 @@
 (setq org-startup-with-latex-preview t)
 
 (setq org-export-in-background t)
+
+(setq org-image-actual-width (/ (display-pixel-width) 3))

@@ -157,3 +157,8 @@
 #+begin_src elisp
 (setq org-export-in-background t)
 #+end_src
+
+* Org mode inline images
+#+begin_src elisp
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+#+end_src
