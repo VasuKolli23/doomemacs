@@ -117,3 +117,5 @@
 (setq org-export-in-background t)
 
 (setq org-image-actual-width (/ (display-pixel-width) 3))
+
+(setq blink-cursor-mode 0)

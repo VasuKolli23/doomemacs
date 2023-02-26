@@ -162,3 +162,9 @@
 #+begin_src elisp
 (setq org-image-actual-width (/ (display-pixel-width) 3))
 #+end_src
+
+* Cursor blinking
+Usually the cursor blinks for 10 times and if there is no input it stops blinking. But I want it to blink forever.
+#+begin_src elisp
+(setq blink-cursor-mode 0)
+#+end_src
