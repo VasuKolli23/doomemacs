@@ -93,6 +93,7 @@
       (:prefix ("t" . "toggle")
        :desc "Comment/Uncomment lines"          "/" #'comment-line))
 
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
