@@ -86,6 +86,9 @@
   (setq org-auto-tangle-default t))
 
 (map! :leader
+      :desc "detangle org file" "d" #'org-babel-detangle)
+
+(map! :leader
       (:prefix ("t" . "toggle")
        :desc "Truncate lines"          "t" #'toggle-truncate-lines))
 
@@ -103,6 +106,7 @@
 
 (xterm-mouse-mode 1)
 
+;; for emacs GUI
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 
 (use-package org-bullets

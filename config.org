@@ -100,6 +100,12 @@
   (setq org-auto-tangle-default t))
 #+END_SRC
 
+* Org detangle code blocks keyboard shortcut
+#+begin_src elisp
+(map! :leader
+      :desc "detangle org file" "d" #'org-babel-detangle)
+#+end_src
+
 * Toggle truncate lines
 #+BEGIN_SRC elisp
 (map! :leader
@@ -132,6 +138,7 @@
 
 * Full screen on startup
 #+begin_src elisp
+;; for emacs GUI
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 #+end_src
 
