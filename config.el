@@ -126,3 +126,11 @@
 (setq org-image-actual-width (/ (display-pixel-width) 3))
 
 (setq blink-cursor-mode 0)
+
+(setq org-table-default-attributes
+      (list
+       '(:align 'center)
+       '(:valign 'center)
+       '(:hlines nil)))
+
+

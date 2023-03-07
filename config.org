@@ -179,3 +179,16 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 #+begin_src elisp
 (setq blink-cursor-mode 0)
 #+end_src
+
+* Org mode tables centering
+#+begin_src elisp
+(setq org-table-default-attributes
+      (list
+       '(:align 'center)
+       '(:valign 'center)
+       '(:hlines nil)))
+#+end_src
+
+* TODO Org mode source block editing vertical split
+#+begin_src elisp
+#+end_src
