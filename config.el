@@ -85,10 +85,10 @@
   :config
   (setq org-auto-tangle-default t))
 
-(map! :after python-mode
-      :localleader
-      :map python-mode-map
-      (:desc "detangle org file" "d" #'org-babel-detangle))
+(add-hook! 'python-mode-hook
+  (map! :localleader
+        (:prefix "b"
+          :desc "Detangle buffer" "d" #'org-babel-detangle)))
 
 (map! :leader
       (:prefix ("t" . "toggle")
