@@ -46,7 +46,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; (setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -191,4 +191,61 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 
 * TODO Org mode source block editing vertical split
 #+begin_src elisp
+#+end_src
+
+* Literature review
+Learnt from https://lucidmanager.org/productivity/emacs-bibtex-mode/
+
+** bib files directory
+#+begin_src elisp
+(setq
+    bib-files-directory  "/home/kolli/work_strand/Way of life/knowledge/zotero/bibliography.bib"
+    pdf-files-directory "/home/kolli/work_strand/Way of life/knowledge/zotero/")
+#+end_src
+
+** Fine tuning bibtex mode
+#+begin_src elisp
+  ;; Spell checking (requires the ispell software)
+  (add-hook 'bibtex-mode-hook 'flyspell-mode)
+
+  ;; Change fields and format
+  (setq bibtex-user-optional-fields
+        '(("keywords" "Keywords to describe the entry" "")
+          ("file" "Link to document file." ":"))
+        bibtex-align-at-equal-sign t)
+#+end_src
+
+** BibLateX
+#+begin_src elisp
+;; BibLaTeX settings
+;; bibtex-mode
+(setq bibtex-dialect 'biblatex)
+#+end_src
+
+** helm-bibtex
+#+begin_src elisp
+(use-package helm-bibtex
+    :config
+    (setq bibtex-completion-bibliography bib-files-directory
+          bibtex-completion-library-path pdf-files-directory
+          bibtex-completion-pdf-field "File"
+          bibtex-completion-notes-path  "/home/kolli/work_strand/Way of life/knowledge/notes/"
+          bibtex-completion-additional-search-fields '(keywords))
+    :bind
+    (("C-c n B" . helm-bibtex)))
+#+end_src
+
+** setting Org-roam directory
+#+begin_src elisp
+(setq org-roam-directory "/home/kolli/work_strand/Way of life/knowledge/notes/")
+#+end_src
+
+** Org roam bibtex config
+#+begin_src elisp
+(use-package org-roam-bibtex
+    :after (org-roam helm-bibtex)
+    :bind (:map org-mode-map ("C-c n b" . orb-note-actions))
+    :config
+    (require 'org-ref))
+    (org-roam-bibtex-mode)
 #+end_src

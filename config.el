@@ -40,7 +40,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;; (setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -134,3 +134,39 @@
        '(:hlines nil)))
 
 
+
+(setq
+    bib-files-directory  "/home/kolli/work_strand/Way of life/knowledge/zotero/bibliography.bib"
+    pdf-files-directory "/home/kolli/work_strand/Way of life/knowledge/zotero/")
+
+  ;; Spell checking (requires the ispell software)
+  (add-hook 'bibtex-mode-hook 'flyspell-mode)
+
+  ;; Change fields and format
+  (setq bibtex-user-optional-fields
+        '(("keywords" "Keywords to describe the entry" "")
+          ("file" "Link to document file." ":"))
+        bibtex-align-at-equal-sign t)
+
+;; BibLaTeX settings
+;; bibtex-mode
+(setq bibtex-dialect 'biblatex)
+
+(use-package helm-bibtex
+    :config
+    (setq bibtex-completion-bibliography bib-files-directory
+          bibtex-completion-library-path pdf-files-directory
+          bibtex-completion-pdf-field "File"
+          bibtex-completion-notes-path  "/home/kolli/work_strand/Way of life/knowledge/notes/"
+          bibtex-completion-additional-search-fields '(keywords))
+    :bind
+    (("C-c n B" . helm-bibtex)))
+
+(setq org-roam-directory "/home/kolli/work_strand/Way of life/knowledge/notes/")
+
+(use-package org-roam-bibtex
+    :after (org-roam helm-bibtex)
+    :bind (:map org-mode-map ("C-c n b" . orb-note-actions))
+    :config
+    (require 'org-ref))
+    (org-roam-bibtex-mode)
