@@ -86,9 +86,26 @@
 (menu-bar-mode t)
 #+end_src
 
+* Full screen on startup
+#+begin_src elisp
+;; for emacs GUI
+(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+#+end_src
+
 * Beacon
 #+BEGIN_SRC elisp
 (beacon-mode 1)
+#+END_SRC
+
+* Fonts
+#+BEGIN_SRC elisp
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 #+END_SRC
 
 * Org auto tangle
@@ -123,26 +140,15 @@ The detangle only works for python mode for now. For it to apply to all programm
        :desc "Comment/Uncomment lines"          "/" #'comment-line))
 #+END_SRC
 
-* Fonts
-#+BEGIN_SRC elisp
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-#+END_SRC
-
 * Mouse support for terminal version
 #+BEGIN_SRC elisp
 (xterm-mouse-mode 1)
 #+END_SRC
 
-* Full screen on startup
+* Cursor blinking
+Usually the cursor blinks for 10 times and if there is no input it stops blinking. But I want it to blink forever.
 #+begin_src elisp
-;; for emacs GUI
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+(setq blink-cursor-mode 0)
 #+end_src
 
 * Org bullets
@@ -172,12 +178,6 @@ The detangle only works for python mode for now. For it to apply to all programm
 * Org mode inline images
 #+begin_src elisp
 (setq org-image-actual-width (/ (display-pixel-width) 3))
-#+end_src
-
-* Cursor blinking
-Usually the cursor blinks for 10 times and if there is no input it stops blinking. But I want it to blink forever.
-#+begin_src elisp
-(setq blink-cursor-mode 0)
 #+end_src
 
 * Org mode tables centering

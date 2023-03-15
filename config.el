@@ -77,7 +77,18 @@
 
 (menu-bar-mode t)
 
+;; for emacs GUI
+(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+
 (beacon-mode 1)
+
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 
 (use-package! org-auto-tangle
   :defer t
@@ -98,18 +109,9 @@
       (:prefix ("t" . "toggle")
        :desc "Comment/Uncomment lines"          "/" #'comment-line))
 
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
-(after! doom-themes
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
-
 (xterm-mouse-mode 1)
 
-;; for emacs GUI
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+(setq blink-cursor-mode 0)
 
 (use-package org-bullets
   :custom
@@ -124,8 +126,6 @@
 (setq org-export-in-background t)
 
 (setq org-image-actual-width (/ (display-pixel-width) 3))
-
-(setq blink-cursor-mode 0)
 
 (setq org-table-default-attributes
       (list
