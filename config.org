@@ -2,6 +2,27 @@
 #+PROPERTY: header-args :session :tangle config.el
 #+auto_tangle: t
 
+* Table of contents :toc:
+- [[#default-lines][Default lines]]
+- [[#display-menu-bar][Display menu bar]]
+- [[#full-screen-on-startup][Full screen on startup]]
+- [[#beacon][Beacon]]
+- [[#fonts][Fonts]]
+- [[#org-auto-tangle][Org auto tangle]]
+- [[#org-detangle-code-blocks-keyboard-shortcut][Org detangle code blocks keyboard shortcut]]
+- [[#toggle-truncate-lines][Toggle truncate lines]]
+- [[#toggle-comment-lines][Toggle comment lines]]
+- [[#mouse-support-for-terminal-version][Mouse support for terminal version]]
+- [[#cursor-blinking][Cursor blinking]]
+- [[#org-bullets][Org bullets]]
+- [[#org-see-latex-fragments][Org see latex fragments]]
+- [[#latex-equation-preview-on-startup][LaTeX equation preview on startup]]
+- [[#org-asynchronous-export][Org asynchronous export]]
+- [[#org-mode-inline-images][Org mode inline images]]
+- [[#org-mode-tables-centering][Org mode tables centering]]
+- [[#org-mode-source-block-editing-vertical-split][Org mode source block editing vertical split]]
+- [[#abaqus-major-mode][Abaqus major mode]]
+
 * Default lines
 #+BEGIN_SRC elisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
@@ -38,7 +59,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-oceanic-next)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -99,7 +120,8 @@
 
 * Fonts
 #+BEGIN_SRC elisp
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
+;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -193,3 +215,9 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 #+begin_src elisp
 #+end_src
 
+* Abaqus major mode
+#+begin_src elisp
+;; (load! "~/emacs_modes/abaqus.el")
+;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
+;; (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
+#+end_src
