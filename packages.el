@@ -53,3 +53,4 @@
 (package! org-auto-tangle)
 (package! org-bullets)
 (package! csv-mode)
+(package! gnuplot)

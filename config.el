@@ -97,10 +97,16 @@
   :config
   (setq org-auto-tangle-default t))
 
+(defun org-babel-detangle-and-save()
+  "Detangle the current buffer and then save all buffers."
+  (interactive)
+  (org-babel-detangle)
+  (evil-write-all nil))
+
 (add-hook! 'python-mode-hook
   (map! :localleader
-        (:prefix "b"
-          :desc "Detangle buffer" "d" #'org-babel-detangle)))
+        (:prefix ("b", "buffer")
+          :desc "Detangle buffer and save all" "d" #'org-babel-detangle-and-save)))
 
 (map! :leader
       (:prefix ("t" . "toggle")
@@ -134,8 +140,32 @@
        '(:valign 'center)
        '(:hlines nil)))
 
+;; (after! org
+  ;; (setq org-src-window-setup 'current-window))
 
+(load! "~/emacs_modes/abaqus.el")
+(add-hook 'abaqus-mode-hook 'turn-on-font-lock)
+(autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
 
-;; (load! "~/emacs_modes/abaqus.el")
-;; (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
-;; (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
+(after! python
+  (setq python-shell-interpreter "python3")
+  (setq python-shell-virtualenv-root "/home/kolli/Envs/common/")
+)
+
+(after! lsp-mode
+  (setq lsp-enable-snippet nil ;; Not using Company Snippets
+        lsp-diagnostic-package :auto
+        lsp-idle-delay 0.500
+        lsp-log-io nil
+        lsp-python-ms-auto-install-server t)
+  (add-hook 'python-mode-hook #'lsp) ;; Auto-enable LSP
+)
+
+(defadvice org-babel-tangle-jump-to-org (after recenter activate)
+  (recenter))
+
+(after! org
+  ;; disable auto-complete in org-mode buffers
+  (remove-hook 'org-mode-hook #'auto-fill-mode)
+  ;; disable company too
+  (setq company-global-modes '(not org-mode)))
