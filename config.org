@@ -25,6 +25,7 @@
 - [[#python-development-setup][Python development setup]]
 - [[#jump-from-src-code-to-org-file-src-block][Jump from src code to org file src block]]
 - [[#disabling-auto-fill-in-org-mode][Disabling auto fill in org mode]]
+- [[#tramp-config][TRAMP config]]
 
 * Default lines
 #+BEGIN_SRC elisp
@@ -267,4 +268,20 @@ We can jump from a particular line in org mode tangled source file to the corres
   (remove-hook 'org-mode-hook #'auto-fill-mode)
   ;; disable company too
   (setq company-global-modes '(not org-mode)))
+#+end_src
+
+* TRAMP config
+TRAMP is too slow.
+#+begin_src elisp
+(after! tramp
+  (setq tramp-inline-compress-start-size 1000)
+  (setq tramp-copy-size-limit 10000)
+  (setq vc-handled-backends nil)
+  (setq tramp-verbose 1)
+  (setq tramp-default-method "scp")
+  (setq tramp-use-ssh-controlmaster-options nil)
+  (setq projectile--mode-line nil)
+  (setq remote-file-name-inhibit-cache nil)
+  (setq tramp-cache-inodes t)
+  (setq tramp-completion-reread-directory-timeout t))
 #+end_src

@@ -169,3 +169,15 @@
   (remove-hook 'org-mode-hook #'auto-fill-mode)
   ;; disable company too
   (setq company-global-modes '(not org-mode)))
+
+(after! tramp
+  (setq tramp-inline-compress-start-size 1000)
+  (setq tramp-copy-size-limit 10000)
+  (setq vc-handled-backends nil)
+  (setq tramp-verbose 1)
+  (setq tramp-default-method "scp")
+  (setq tramp-use-ssh-controlmaster-options nil)
+  (setq projectile--mode-line nil)
+  (setq remote-file-name-inhibit-cache nil)
+  (setq tramp-cache-inodes t)
+  (setq tramp-completion-reread-directory-timeout t))
