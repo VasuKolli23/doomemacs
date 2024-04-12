@@ -6,6 +6,7 @@
 - [[#default-lines][Default lines]]
 - [[#display-menu-bar][Display menu bar]]
 - [[#full-screen-on-startup][Full screen on startup]]
+- [[#quit-emacs-without-confirmation][Quit emacs without confirmation]]
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
 - [[#org-auto-tangle][Org auto tangle]]
@@ -22,10 +23,16 @@
 - [[#org-mode-tables-centering][Org mode tables centering]]
 - [[#org-mode-source-block-editing-vertical-split][Org mode source block editing vertical split]]
 - [[#abaqus-major-mode][Abaqus major mode]]
+- [[#ls-dyna-major-mode][LS-DYNA major mode]]
 - [[#python-development-setup][Python development setup]]
 - [[#jump-from-src-code-to-org-file-src-block][Jump from src code to org file src block]]
+- [[#org-export-preserve-line-breaks][Org export preserve line breaks]]
 - [[#disabling-auto-fill-in-org-mode][Disabling auto fill in org mode]]
+- [[#toggle-evil-mode][Toggle evil mode]]
 - [[#tramp-config][TRAMP config]]
+- [[#permamently-display-workspaces-minibuffer][Permamently display workspaces minibuffer]]
+- [[#revert-buffer-and-centering][Revert buffer and centering]]
+- [[#gnuplot-mode-for-gp-files][Gnuplot mode for .gp files]]
 
 * Default lines
 #+BEGIN_SRC elisp
@@ -116,6 +123,11 @@
 #+begin_src elisp
 ;; for emacs GUI
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+#+end_src
+
+* Quit emacs without confirmation
+#+begin_src elisp
+(setq confirm-kill-emacs nil)
 #+end_src
 
 * Beacon
@@ -229,11 +241,18 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
   ;; (setq org-src-window-setup 'current-window))
 #+end_src
 
-* TODO Abaqus major mode
+* Abaqus major mode
 #+begin_src elisp
-(load! "~/emacs_modes/abaqus.el")
+(load! "~/.config/doom/emacs_modes/abaqus.el")
 (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
+#+end_src
+
+* LS-DYNA major mode
+#+begin_src elisp
+(load! "~/.config/doom/emacs_modes/lsdyna.el")
+(add-hook 'lsdyna-mode-hook 'turn-on-font-lock)
+(autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
 #+end_src
 
 * Python development setup
@@ -261,6 +280,12 @@ We can jump from a particular line in org mode tangled source file to the corres
   (recenter))
 #+end_src
 
+* Org export preserve line breaks
+#+begin_src elisp
+  (setq org-export-preserve-breaks t)
+#+end_src
+
+
 * Disabling auto fill in org mode
 #+begin_src elisp
 (after! org
@@ -270,18 +295,69 @@ We can jump from a particular line in org mode tangled source file to the corres
   (setq company-global-modes '(not org-mode)))
 #+end_src
 
+* Toggle evil mode
+Sometimes I would use nvim from a terminal and it is necessary to turn off evil mode for better operation
+#+begin_src elisp
+(defun toggle-evil-mode ()
+  "Toggle evil-mode on and off."
+  (interactive) ; Make the function callable via M-x and keybindings
+  (if (bound-and-true-p evil-mode)
+      (progn
+        (evil-mode -1)
+        (message "Evil mode disabled"))
+    (evil-mode 1)
+    (message "Evil mode enabled")))
+(global-set-key (kbd "<f2>") #'toggle-evil-mode)
+#+end_src
+
 * TRAMP config
-TRAMP is too slow.
+Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
 #+begin_src elisp
 (after! tramp
-  (setq tramp-inline-compress-start-size 1000)
-  (setq tramp-copy-size-limit 10000)
   (setq vc-handled-backends nil)
+  (setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
   (setq tramp-verbose 1)
-  (setq tramp-default-method "scp")
+  (setq remote-file-name-inhibit-locks t)
+  (setq tramp-default-method "rsync")
   (setq tramp-use-ssh-controlmaster-options nil)
   (setq projectile--mode-line nil)
   (setq remote-file-name-inhibit-cache nil)
   (setq tramp-cache-inodes t)
-  (setq tramp-completion-reread-directory-timeout t))
+  (setq tramp-completion-reread-directory-timeout t)
+  (setq debug-ignored-errors
+      (cons 'remote-file-error debug-ignored-errors))
+  (setq tramp-histfile-override t) ;; tramp does not pollute history - DOES NOT WORK FOR BASH 5.0.0
+  )
+#+end_src
+
+* Permamently display workspaces minibuffer
+#+begin_src elisp
+(after! persp-mode
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
+#+end_src
+
+* Revert buffer and centering
+#+begin_src elisp
+(defun vasu/revert-and-center-last-line ()
+  "Revert the current buffer, go to the last line, and center the view."
+  (interactive) ; Makes the function callable through M-x and key bindings
+  (revert-buffer :ignore-auto :noconfirm) ; Reverts the buffer without confirmation
+  (goto-char (point-max)) ; Moves the cursor to the end of the buffer
+  (recenter)) ; Centers the line in the window
+
+(map! "<f5>" #'vasu/revert-and-center-last-line)
+#+end_src
+
+* Gnuplot mode for .gp files
+#+begin_src elisp
+(add-to-list 'auto-mode-alist '("\\.gp\\'" . gnuplot-mode))
+(add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
 #+end_src

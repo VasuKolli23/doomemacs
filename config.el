@@ -80,6 +80,8 @@
 ;; for emacs GUI
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 
+(setq confirm-kill-emacs nil)
+
 (beacon-mode 1)
 
 ;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
@@ -143,9 +145,13 @@
 ;; (after! org
   ;; (setq org-src-window-setup 'current-window))
 
-(load! "~/emacs_modes/abaqus.el")
+(load! "~/.config/doom/emacs_modes/abaqus.el")
 (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
+
+(load! "~/.config/doom/emacs_modes/lsdyna.el")
+(add-hook 'lsdyna-mode-hook 'turn-on-font-lock)
+(autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
 
 (after! python
   (setq python-shell-interpreter "python3")
@@ -164,20 +170,60 @@
 (defadvice org-babel-tangle-jump-to-org (after recenter activate)
   (recenter))
 
+  (setq org-export-preserve-breaks t)
+
 (after! org
   ;; disable auto-complete in org-mode buffers
   (remove-hook 'org-mode-hook #'auto-fill-mode)
   ;; disable company too
   (setq company-global-modes '(not org-mode)))
 
+(defun toggle-evil-mode ()
+  "Toggle evil-mode on and off."
+  (interactive) ; Make the function callable via M-x and keybindings
+  (if (bound-and-true-p evil-mode)
+      (progn
+        (evil-mode -1)
+        (message "Evil mode disabled"))
+    (evil-mode 1)
+    (message "Evil mode enabled")))
+(global-set-key (kbd "<f2>") #'toggle-evil-mode)
+
 (after! tramp
-  (setq tramp-inline-compress-start-size 1000)
-  (setq tramp-copy-size-limit 10000)
   (setq vc-handled-backends nil)
+  (setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
   (setq tramp-verbose 1)
-  (setq tramp-default-method "scp")
+  (setq remote-file-name-inhibit-locks t)
+  (setq tramp-default-method "rsync")
   (setq tramp-use-ssh-controlmaster-options nil)
   (setq projectile--mode-line nil)
   (setq remote-file-name-inhibit-cache nil)
   (setq tramp-cache-inodes t)
-  (setq tramp-completion-reread-directory-timeout t))
+  (setq tramp-completion-reread-directory-timeout t)
+  (setq debug-ignored-errors
+      (cons 'remote-file-error debug-ignored-errors))
+  (setq tramp-histfile-override t) ;; tramp does not pollute history - DOES NOT WORK FOR BASH 5.0.0
+  )
+
+(after! persp-mode
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
+
+(defun vasu/revert-and-center-last-line ()
+  "Revert the current buffer, go to the last line, and center the view."
+  (interactive) ; Makes the function callable through M-x and key bindings
+  (revert-buffer :ignore-auto :noconfirm) ; Reverts the buffer without confirmation
+  (goto-char (point-max)) ; Moves the cursor to the end of the buffer
+  (recenter)) ; Centers the line in the window
+
+(map! "<f5>" #'vasu/revert-and-center-last-line)
+
+(add-to-list 'auto-mode-alist '("\\.gp\\'" . gnuplot-mode))
+(add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
