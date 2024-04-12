@@ -33,6 +33,7 @@
 - [[#permamently-display-workspaces-minibuffer][Permamently display workspaces minibuffer]]
 - [[#revert-buffer-and-centering][Revert buffer and centering]]
 - [[#gnuplot-mode-for-gp-files][Gnuplot mode for .gp files]]
+- [[#todo][TODO]]
 
 * Default lines
 #+BEGIN_SRC elisp
@@ -361,3 +362,6 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
 (add-to-list 'auto-mode-alist '("\\.gp\\'" . gnuplot-mode))
 (add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
 #+end_src
+
+* TODO
++ In lsdyna and abaqus mode - cursor goes to the end after save.
