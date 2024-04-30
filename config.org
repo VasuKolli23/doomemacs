@@ -7,6 +7,7 @@
 - [[#display-menu-bar][Display menu bar]]
 - [[#full-screen-on-startup][Full screen on startup]]
 - [[#quit-emacs-without-confirmation][Quit emacs without confirmation]]
+- [[#line-height][Line height]]
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
 - [[#org-auto-tangle][Org auto tangle]]
@@ -129,6 +130,11 @@
 * Quit emacs without confirmation
 #+begin_src elisp
 (setq confirm-kill-emacs nil)
+#+end_src
+
+* Line height
+#+begin_src elisp
+(setq-default line-spacing 2)
 #+end_src
 
 * Beacon

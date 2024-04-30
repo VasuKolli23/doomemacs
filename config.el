@@ -82,6 +82,8 @@
 
 (setq confirm-kill-emacs nil)
 
+(setq-default line-spacing 2)
+
 (beacon-mode 1)
 
 ;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
