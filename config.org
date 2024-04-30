@@ -10,7 +10,6 @@
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
 - [[#org-auto-tangle][Org auto tangle]]
-- [[#org-detangle-code-blocks-keyboard-shortcut][Org detangle code blocks keyboard shortcut]]
 - [[#toggle-truncate-lines][Toggle truncate lines]]
 - [[#toggle-comment-lines][Toggle comment lines]]
 - [[#mouse-support-for-terminal-version][Mouse support for terminal version]]
@@ -24,7 +23,6 @@
 - [[#org-mode-source-block-editing-vertical-split][Org mode source block editing vertical split]]
 - [[#abaqus-major-mode][Abaqus major mode]]
 - [[#ls-dyna-major-mode][LS-DYNA major mode]]
-- [[#python-development-setup][Python development setup]]
 - [[#jump-from-src-code-to-org-file-src-block][Jump from src code to org file src block]]
 - [[#org-export-preserve-line-breaks][Org export preserve line breaks]]
 - [[#disabling-auto-fill-in-org-mode][Disabling auto fill in org mode]]
@@ -33,7 +31,9 @@
 - [[#permamently-display-workspaces-minibuffer][Permamently display workspaces minibuffer]]
 - [[#revert-buffer-and-centering][Revert buffer and centering]]
 - [[#gnuplot-mode-for-gp-files][Gnuplot mode for .gp files]]
-- [[#todo][TODO]]
+- [[#python][Python]]
+  - [[#setting-python-environments][Setting python environments]]
+  - [[#debugging][Debugging]]
 
 * Default lines
 #+BEGIN_SRC elisp
@@ -157,22 +157,6 @@
   (setq org-auto-tangle-default t))
 #+END_SRC
 
-* Org detangle code blocks keyboard shortcut
-The detangle only works for python mode for now. For it to apply to all programming languages replace, =python-mode-hook= to =prog-mode-hook=. However, I'm not doing it now.
-
-#+begin_src elisp
-(defun org-babel-detangle-and-save()
-  "Detangle the current buffer and then save all buffers."
-  (interactive)
-  (org-babel-detangle)
-  (evil-write-all nil))
-
-(add-hook! 'python-mode-hook
-  (map! :localleader
-        (:prefix ("b", "buffer")
-          :desc "Detangle buffer and save all" "d" #'org-babel-detangle-and-save)))
-#+end_src
-
 * Toggle truncate lines
 #+BEGIN_SRC elisp
 (map! :leader
@@ -256,23 +240,6 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 (autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
 #+end_src
 
-* Python development setup
-#+begin_src elisp
-(after! python
-  (setq python-shell-interpreter "python3")
-  (setq python-shell-virtualenv-root "/home/kolli/Envs/common/")
-)
-
-(after! lsp-mode
-  (setq lsp-enable-snippet nil ;; Not using Company Snippets
-        lsp-diagnostic-package :auto
-        lsp-idle-delay 0.500
-        lsp-log-io nil
-        lsp-python-ms-auto-install-server t)
-  (add-hook 'python-mode-hook #'lsp) ;; Auto-enable LSP
-)
-#+end_src
-
 * Jump from src code to org file src block
 We can jump from a particular line in org mode tangled source file to the corresponding org mode src block line using the function org-babel-tangle-jump-to-org. But the cursor is at the bottom of the screen. Now we change it to the center.
 
@@ -330,7 +297,6 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
   (setq tramp-completion-reread-directory-timeout t)
   (setq debug-ignored-errors
       (cons 'remote-file-error debug-ignored-errors))
-  (setq tramp-histfile-override t) ;; tramp does not pollute history - DOES NOT WORK FOR BASH 5.0.0
   )
 #+end_src
 
@@ -363,5 +329,19 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
 (add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
 #+end_src
 
-* TODO
-+ In lsdyna and abaqus mode - cursor goes to the end after save.
+
+* Python
+** Setting python environments
+#+begin_src elisp
+(after! python
+  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
+  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3"))
+#+end_src
+
+** Debugging
+#+begin_src elisp
+(after! dap-mode
+  (require 'dap-python)
+  (setq dap-python-executable "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
+  (setq dap-python-debugger 'debugpy))
+#+end_src

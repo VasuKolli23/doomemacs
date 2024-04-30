@@ -99,17 +99,6 @@
   :config
   (setq org-auto-tangle-default t))
 
-(defun org-babel-detangle-and-save()
-  "Detangle the current buffer and then save all buffers."
-  (interactive)
-  (org-babel-detangle)
-  (evil-write-all nil))
-
-(add-hook! 'python-mode-hook
-  (map! :localleader
-        (:prefix ("b", "buffer")
-          :desc "Detangle buffer and save all" "d" #'org-babel-detangle-and-save)))
-
 (map! :leader
       (:prefix ("t" . "toggle")
        :desc "Truncate lines"          "t" #'toggle-truncate-lines))
@@ -153,20 +142,6 @@
 (add-hook 'lsdyna-mode-hook 'turn-on-font-lock)
 (autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
 
-(after! python
-  (setq python-shell-interpreter "python3")
-  (setq python-shell-virtualenv-root "/home/kolli/Envs/common/")
-)
-
-(after! lsp-mode
-  (setq lsp-enable-snippet nil ;; Not using Company Snippets
-        lsp-diagnostic-package :auto
-        lsp-idle-delay 0.500
-        lsp-log-io nil
-        lsp-python-ms-auto-install-server t)
-  (add-hook 'python-mode-hook #'lsp) ;; Auto-enable LSP
-)
-
 (defadvice org-babel-tangle-jump-to-org (after recenter activate)
   (recenter))
 
@@ -205,7 +180,6 @@
   (setq tramp-completion-reread-directory-timeout t)
   (setq debug-ignored-errors
       (cons 'remote-file-error debug-ignored-errors))
-  (setq tramp-histfile-override t) ;; tramp does not pollute history - DOES NOT WORK FOR BASH 5.0.0
   )
 
 (after! persp-mode
@@ -227,3 +201,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.gp\\'" . gnuplot-mode))
 (add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
+
+(after! python
+  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
+  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3"))
+
+(after! dap-mode
+  (require 'dap-python)
+  (setq dap-python-executable "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
+  (setq dap-python-debugger 'debugpy))
