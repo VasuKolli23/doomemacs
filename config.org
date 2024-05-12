@@ -30,7 +30,7 @@
 - [[#disabling-auto-fill-in-org-mode][Disabling auto fill in org mode]]
 - [[#toggle-evil-mode][Toggle evil mode]]
 - [[#tramp-config][TRAMP config]]
-- [[#permamently-display-workspaces-minibuffer][Permamently display workspaces minibuffer]]
+- [[#permanently-display-workspaces-minibuffer][Permanently display workspaces minibuffer]]
 - [[#revert-buffer-and-centering][Revert buffer and centering]]
 - [[#gnuplot-mode-for-gp-files][Gnuplot mode for .gp files]]
 - [[#python][Python]]
@@ -312,7 +312,7 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
   )
 #+end_src
 
-* Permamently display workspaces minibuffer
+* Permanently display workspaces minibuffer
 #+begin_src elisp
 (after! persp-mode
   (defun display-workspaces-in-minibuffer ()
