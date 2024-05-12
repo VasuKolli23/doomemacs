@@ -27,7 +27,8 @@
        ;;ido               ; the other *other* search engine...
        (ivy               ; a search engine for love and life
         +icons
-        +childframe)
+        +childframe
+        +fuzzy)
        ;;vertico           ; the search engine of the future
 
        :ui
@@ -74,7 +75,8 @@
        (dired             ; making dired pretty [functional]
         +icons)
        electric          ; smarter, keyword-based electric-indent
-       ibuffer         ; interactive buffer management
+       (ibuffer         ; interactive buffer management
+        +icons)
        undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -85,7 +87,8 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
+       (syntax              ; tasing you for every semicolon you forget
+        +childframe)
        (spell +flyspell) ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
@@ -101,7 +104,8 @@
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
-       lsp               ; M-x vscode
+       (lsp               ; M-x vscode
+        +peek)
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
