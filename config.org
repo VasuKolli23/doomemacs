@@ -18,6 +18,7 @@
 - [[#cursor-blinking][Cursor blinking]]
 - [[#org-bullets][Org bullets]]
 - [[#org-see-latex-fragments][Org see latex fragments]]
+- [[#hide-org-mode-emphasis-markers][Hide org mode emphasis markers]]
 - [[#latex-equation-preview-on-startup][LaTeX equation preview on startup]]
 - [[#org-asynchronous-export][Org asynchronous export]]
 - [[#org-mode-inline-images][Org mode inline images]]
@@ -205,7 +206,13 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 
 * Org see latex fragments
 #+begin_src elisp
-(add-hook 'org-mode-hook 'org-fragtog-mode)
+;;(add-hook 'org-mode-hook 'org-fragtog-mode)
+#+end_src
+
+* Hide org mode emphasis markers
+These are * in *bold*, / in /italic/ etc.
+#+begin_src elisp
+(setq org-hide-emphasis-markers t)
 #+end_src
 
 * LaTeX equation preview on startup
@@ -232,10 +239,12 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
        '(:hlines nil)))
 #+end_src
 
-* TODO Org mode source block editing vertical split
+* Org mode source block editing vertical split
 #+begin_src elisp
-;; (after! org
-  ;; (setq org-src-window-setup 'current-window))
+;; Set global window splitting preferences to always split vertically
+(after! org
+  (setq org-src-window-setup 'split-window-right)
+  (set-popup-rule! "^\\*Org Src" :ignore t))
 #+end_src
 
 * Abaqus major mode

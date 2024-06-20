@@ -121,7 +121,9 @@
   (org-ellipsis "⤵")
   :hook (org-mode . org-bullets-mode))
 
-(add-hook 'org-mode-hook 'org-fragtog-mode)
+;;(add-hook 'org-mode-hook 'org-fragtog-mode)
+
+(setq org-hide-emphasis-markers t)
 
 (setq org-startup-with-latex-preview t)
 
@@ -135,8 +137,10 @@
        '(:valign 'center)
        '(:hlines nil)))
 
-;; (after! org
-  ;; (setq org-src-window-setup 'current-window))
+;; Set global window splitting preferences to always split vertically
+(after! org
+  (setq org-src-window-setup 'split-window-right)
+  (set-popup-rule! "^\\*Org Src" :ignore t))
 
 (load! "~/.config/doom/emacs_modes/abaqus.el")
 (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
