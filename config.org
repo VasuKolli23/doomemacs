@@ -10,6 +10,7 @@
 - [[#line-height][Line height]]
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
+- [[#delete-selection-mode][Delete selection mode]]
 - [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
 - [[#org-auto-tangle][Org auto tangle]]
 - [[#toggle-truncate-lines][Toggle truncate lines]]
@@ -78,7 +79,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -155,6 +156,12 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 #+END_SRC
+
+* Delete selection mode
+This allows emacs to replace the selected text upon paste.
+#+begin_src elisp
+(setq delete-selection-mode t)
+#+end_src
 
 * Dired infinite buffers disable
 #+begin_src elisp
