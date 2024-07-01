@@ -213,7 +213,7 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 
 * Org see latex fragments
 #+begin_src elisp
-;;(add-hook 'org-mode-hook 'org-fragtog-mode)
+(add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src
 
 * Hide org mode emphasis markers

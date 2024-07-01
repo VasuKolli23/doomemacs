@@ -123,7 +123,7 @@
   (org-ellipsis "⤵")
   :hook (org-mode . org-bullets-mode))
 
-;;(add-hook 'org-mode-hook 'org-fragtog-mode)
+(add-hook 'org-mode-hook 'org-fragtog-mode)
 
 (setq org-hide-emphasis-markers t)
 
