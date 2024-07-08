@@ -105,6 +105,10 @@
   :config
   (setq org-auto-tangle-default t))
 
+(after! org-noter
+  (setq org-noter-always-create-frame nil
+        org-noter-highlight-selected t))
+
 (map! :leader
       (:prefix ("t" . "toggle")
        :desc "Truncate lines"          "t" #'toggle-truncate-lines))

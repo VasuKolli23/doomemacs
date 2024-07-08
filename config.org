@@ -13,6 +13,7 @@
 - [[#delete-selection-mode][Delete selection mode]]
 - [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
 - [[#org-auto-tangle][Org auto tangle]]
+- [[#org-noter-settings][Org noter settings]]
 - [[#toggle-truncate-lines][Toggle truncate lines]]
 - [[#toggle-comment-lines][Toggle comment lines]]
 - [[#mouse-support-for-terminal-version][Mouse support for terminal version]]
@@ -176,6 +177,13 @@ This allows emacs to replace the selected text upon paste.
   :config
   (setq org-auto-tangle-default t))
 #+END_SRC
+
+* Org noter settings
+#+begin_src elisp
+(after! org-noter
+  (setq org-noter-always-create-frame nil
+        org-noter-highlight-selected t))
+#+end_src
 
 * Toggle truncate lines
 #+BEGIN_SRC elisp
