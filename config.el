@@ -217,8 +217,8 @@
 (add-hook 'gnuplot-mode-hook (lambda () (display-line-numbers-mode 1)))
 
 (after! python
-  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
-  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3"))
+  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.10.0/envs/common_3_10_0/bin/python3")
+  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.10.0/envs/common_3_10_0/bin/python3"))
 
 (after! dap-mode
   (require 'dap-python)

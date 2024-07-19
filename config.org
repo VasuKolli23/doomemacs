@@ -370,8 +370,8 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
 ** Setting python environments
 #+begin_src elisp
 (after! python
-  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3")
-  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.11.0/envs/common_3_11_0/bin/python3"))
+  (setq python-shell-interpreter "/home/vasu/.pyenv/versions/3.10.0/envs/common_3_10_0/bin/python3")
+  (setq lsp-pyright-python-executable-cmd "/home/vasu/.pyenv/versions/3.10.0/envs/common_3_10_0/bin/python3"))
 #+end_src
 
 ** Debugging
