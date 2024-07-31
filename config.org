@@ -10,6 +10,7 @@
 - [[#line-height][Line height]]
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
+- [[#global-auto-revert][Global auto revert]]
 - [[#delete-selection-mode][Delete selection mode]]
 - [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
 - [[#org-auto-tangle][Org auto tangle]]
@@ -157,6 +158,13 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 #+END_SRC
+
+* Global auto revert
+Reloads the file from the disk when the file changes
+#+begin_src elisp
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
+#+end_src
 
 * Delete selection mode
 This allows emacs to replace the selected text upon paste.

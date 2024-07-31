@@ -95,6 +95,9 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
+
 (setq delete-selection-mode t)
 
 (setq dired-kill-when-opening-new-dired-buffer t)
