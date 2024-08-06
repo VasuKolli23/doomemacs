@@ -40,6 +40,12 @@
 - [[#python][Python]]
   - [[#setting-python-environments][Setting python environments]]
   - [[#debugging][Debugging]]
+- [[#auctex-settings][Auctex settings]]
+  - [[#remember-to-set-dir-localsel-file-for-example][Remember to set .dir-locals.el file. For example]]
+  - [[#for-bibtex-to-work-well][For Bibtex to work well]]
+  - [[#to-use-pdf-tools-instead-of-okular][To use pdf-tools instead of okular]]
+  - [[#reftex-to-ref-chpaters-sections-figures-etc][Reftex to \ref chpaters, sections, figures etc..]]
+  - [[#asynchronous-latex-fragment-generation][Asynchronous latex fragment generation]]
 
 * Default lines
 #+BEGIN_SRC elisp
@@ -423,4 +429,42 @@ Key bindings for dap mode
       :desc "dap breakpoint condition"   "c" #'dap-breakpoint-condition
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
+#+end_src
+
+* Auctex settings
+** Remember to set .dir-locals.el file. For example
+#+begin_comment
+((latex-mode
+  (TeX-master . "/home/vasu/work_strand/PhD_thesis/20240805/main.tex")
+  (reftex-default-bibliography . ("/home/vasu/work_strand/PhD_thesis/20240805/bibliography.bib"))))
+#+end_comment
+
+** For Bibtex to work well
+#+begin_src elisp
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil) ;; asks for master file
+#+end_src
+** To use pdf-tools instead of okular
+#+begin_src elisp
+;; Ensure PDF Tools is loaded and configured
+(after! pdf-tools
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer))
+
+;; Configure AUCTeX to use PDF Tools
+(after! tex
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t
+        TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))))
+#+end_src
+** Reftex to \ref chpaters, sections, figures etc..
+#+begin_src elisp
+(after! tex
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-auctex t))
+#+end_src
+** Asynchronous latex fragment generation
+#+begin_src elisp
+(add-hook 'LaTeX-mode-hook 'xenops-mode)
 #+end_src

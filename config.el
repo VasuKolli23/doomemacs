@@ -258,3 +258,24 @@
       :desc "dap breakpoint condition"   "c" #'dap-breakpoint-condition
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil) ;; asks for master file
+
+;; Ensure PDF Tools is loaded and configured
+(after! pdf-tools
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer))
+
+;; Configure AUCTeX to use PDF Tools
+(after! tex
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+        TeX-source-correlate-start-server t
+        TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))))
+
+(after! tex
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-auctex t))
+
+(add-hook 'LaTeX-mode-hook 'xenops-mode)
