@@ -279,3 +279,4 @@
 (setq reftex-plug-into-auctex t))
 
 (add-hook 'LaTeX-mode-hook 'xenops-mode)
+(setq xenops-math-image-scale-factor 1.5)

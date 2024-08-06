@@ -467,4 +467,5 @@ Key bindings for dap mode
 ** Asynchronous latex fragment generation
 #+begin_src elisp
 (add-hook 'LaTeX-mode-hook 'xenops-mode)
+(setq xenops-math-image-scale-factor 1.5)
 #+end_src
