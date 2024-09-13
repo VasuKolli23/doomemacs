@@ -95,10 +95,10 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(global-auto-revert-mode 1)
-(setq global-auto-revert-non-file-buffers t)
-
 (setq delete-selection-mode t)
+
+(setq ispell-program-name nil)
+(setq-default flyspell-mode nil)
 
 (setq dired-kill-when-opening-new-dired-buffer t)
 
@@ -259,6 +259,10 @@
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
 
+(after! tex
+(setq font-latex-fontify-script nil)
+(setq pretty-symbols-mode nil))
+
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil) ;; asks for master file
@@ -274,9 +278,11 @@
         TeX-source-correlate-start-server t
         TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))))
 
-(after! tex
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(after! tex
 (setq reftex-plug-into-auctex t))
 
-(add-hook 'LaTeX-mode-hook 'xenops-mode)
-(setq xenops-math-image-scale-factor 1.5)
+;; (add-hook 'LaTeX-mode-hook 'xenops-mode)
+;; (after! tex
+;; (setq xenops-math-image-scale-factor 1.25)
+;; (setq xenops-reveal-on-entry t))

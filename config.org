@@ -10,8 +10,8 @@
 - [[#line-height][Line height]]
 - [[#beacon][Beacon]]
 - [[#fonts][Fonts]]
-- [[#global-auto-revert][Global auto revert]]
 - [[#delete-selection-mode][Delete selection mode]]
+- [[#disable-flyspell-mode-globally-by-default][Disable flyspell mode globally by default]]
 - [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
 - [[#org-auto-tangle][Org auto tangle]]
 - [[#org-noter-settings][Org noter settings]]
@@ -42,7 +42,8 @@
   - [[#debugging][Debugging]]
 - [[#auctex-settings][Auctex settings]]
   - [[#remember-to-set-dir-localsel-file-for-example][Remember to set .dir-locals.el file. For example]]
-  - [[#for-bibtex-to-work-well][For Bibtex to work well]]
+  - [[#disable-pretty-symbols][Disable pretty symbols]]
+  - [[#support-for-multi-document-latex-projects][Support for multi document latex projects]]
   - [[#to-use-pdf-tools-instead-of-okular][To use pdf-tools instead of okular]]
   - [[#reftex-to-ref-chpaters-sections-figures-etc][Reftex to \ref chpaters, sections, figures etc..]]
   - [[#asynchronous-latex-fragment-generation][Asynchronous latex fragment generation]]
@@ -165,17 +166,16 @@
   '(font-lock-keyword-face :slant italic))
 #+END_SRC
 
-* Global auto revert
-Reloads the file from the disk when the file changes
-#+begin_src elisp
-(global-auto-revert-mode 1)
-(setq global-auto-revert-non-file-buffers t)
-#+end_src
-
 * Delete selection mode
 This allows emacs to replace the selected text upon paste.
 #+begin_src elisp
 (setq delete-selection-mode t)
+#+end_src
+
+* Disable flyspell mode globally by default
+#+begin_src elisp
+(setq ispell-program-name nil)
+(setq-default flyspell-mode nil)
 #+end_src
 
 * Dired infinite buffers disable
@@ -439,12 +439,21 @@ Key bindings for dap mode
   (reftex-default-bibliography . ("/home/vasu/work_strand/PhD_thesis/20240805/bibliography.bib"))))
 #+end_comment
 
-** For Bibtex to work well
+** Disable pretty symbols
+#+begin_src elisp
+(after! tex
+(setq font-latex-fontify-script nil)
+(setq pretty-symbols-mode nil))
+#+end_src
+
+** Support for multi document latex projects
+https://emacsdocs.org/docs/auctex/Top
 #+begin_src elisp
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil) ;; asks for master file
 #+end_src
+
 ** To use pdf-tools instead of okular
 #+begin_src elisp
 ;; Ensure PDF Tools is loaded and configured
@@ -458,14 +467,18 @@ Key bindings for dap mode
         TeX-source-correlate-start-server t
         TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))))
 #+end_src
+
 ** Reftex to \ref chpaters, sections, figures etc..
 #+begin_src elisp
-(after! tex
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(after! tex
 (setq reftex-plug-into-auctex t))
 #+end_src
+
 ** Asynchronous latex fragment generation
 #+begin_src elisp
-(add-hook 'LaTeX-mode-hook 'xenops-mode)
-(setq xenops-math-image-scale-factor 1.5)
+;; (add-hook 'LaTeX-mode-hook 'xenops-mode)
+;; (after! tex
+;; (setq xenops-math-image-scale-factor 1.25)
+;; (setq xenops-reveal-on-entry t))
 #+end_src

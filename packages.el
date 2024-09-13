@@ -56,5 +56,5 @@
 (package! gnuplot)
 ;; auctex problem
 (package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
-;; fragtog but asynchronous - https://github.com/dandavison/xenops
+;; auctex fragtog but asynchronous - https://github.com/dandavison/xenops
 (package! xenops)
