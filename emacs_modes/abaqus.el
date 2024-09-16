@@ -1,23 +1,6 @@
 ;; abaqus.el
-;; $Id: abaqus.el,v 1.5 2002/07/03 12:13:43 jorgen Exp $
-;;
-;; Author:   Jorgen S Bergstrom <jorgen@polymerFEM.com>
-;; URL:      http://www.polymerFEM.com
-;;
-;; Modified by: James Lockley <safricanjames@yahoo.co.uk>
-;;              Martin Lüthi
-;; Modified by: Nidish Narayanaa Balaji <nidbid@gmail.com> (on 2020/08/14)
-;;
-;; Installation:
-;;    add the following lines to your .emacs file:
-;;
-;;       ; abaqus
-;;       (add-hook 'abaqus-mode-hook 'turn-on-font-lock)
-;;       (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
-;;
-;;    copy this file the emacs site-lisp directory:
-;;
-;;       cp abaqus.el [path to emacs site-lisp directory]
+;; Author:  Vasu Kolli - vasukolli23@gmail.com
+
 (require 'outline)
 
 (defvar abaqus-mode-hook nil)
@@ -43,36 +26,36 @@
 ;; Keymap
 (defvar abaqus-mode-map
   (let ((map (make-sparse-keymap)))
-       (define-key map (kbd "TAB") 'outline-toggle-children)
-       map)
+    (define-key map (kbd "TAB") 'outline-toggle-children)
+    map)
   "Keymap for `abaqus-mode`.")
 
 ;; Syntax table
 (defvar abaqus-mode-syntax-table
   (let ((st (make-syntax-table)))
-       ;; Define `**` as a comment start
-       (modify-syntax-entry ?\* ". 12b" st)
-       (modify-syntax-entry ?\n "> b" st)
-       st)
+    ;; Define `**` as a comment start
+    (modify-syntax-entry ?\* ". 12b" st)
+    (modify-syntax-entry ?\n "> b" st)
+    st)
   "Syntax table for `abaqus-mode`.")
 
 ;; Folding function
 (defun abaqus-outline-setup ()
-       "Setup folding for sections with more than `abaqus-outline-threshold` lines between * lines."
-       (outline-minor-mode 1)
-       (setq outline-regexp "^\\*")
-       (save-excursion
-        (goto-char (point-min))
-        (let ((last-star-pos (point-min))
-              (last-star-line (line-number-at-pos (point-min)))
-              (while (re-search-forward "^\\*" nil t)
-                     (let ((current-star-pos (match-beginning 0))
-                           (current-star-line (line-number-at-pos (point)))
-                           (when (> (- current-star-line last-star-line) abaqus-outline-threshold)
-                                 (goto-char last-star-pos)
-                                 (outline-hide-subtree))
-                           (setq last-star-pos current-star-pos)
-                           (setq last-star-line current-star-line))))))))
+  "Setup folding for sections with more than `abaqus-outline-threshold` lines between * lines."
+  (outline-minor-mode 1)
+  (setq outline-regexp "^\\*")
+  (save-excursion
+    (goto-char (point-min))
+    (let ((last-star-pos (point-min))
+          (last-star-line (line-number-at-pos (point-min)))
+          (while (re-search-forward "^\\*" nil t)
+            (let ((current-star-pos (match-beginning 0))
+                  (current-star-line (line-number-at-pos (point)))
+                  (when (> (- current-star-line last-star-line) abaqus-outline-threshold)
+                    (goto-char last-star-pos)
+                    (outline-hide-subtree))
+                  (setq last-star-pos current-star-pos)
+                  (setq last-star-line current-star-line))))))))
 
 ;; Run abaqus-outline-setup every time abaqus-mode is activated
 (add-hook 'abaqus-mode-hook 'abaqus-outline-setup)
