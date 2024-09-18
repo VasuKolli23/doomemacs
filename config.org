@@ -135,8 +135,8 @@
 
 * Full screen on startup
 #+begin_src elisp
-;; for emacs GUI
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+;; Enable true fullscreen mode on startup
+(add-hook 'emacs-startup-hook #'toggle-frame-fullscreen)
 #+end_src
 
 * Quit emacs without confirmation
@@ -221,7 +221,11 @@ This allows emacs to replace the selected text upon paste.
 * Cursor blinking
 Usually the cursor blinks for 10 times and if there is no input it stops blinking. But I want it to blink forever.
 #+begin_src elisp
-(setq blink-cursor-mode 0)
+;; Enable cursor blinking indefinitely
+(setq blink-cursor-mode t
+      blink-cursor-interval 0.5  ; Time (in seconds) between blinks
+      blink-cursor-delay 0.0)    ; No delay before blinking starts
+(blink-cursor-mode 1)          ; Activate cursor blinking
 #+end_src
 
 * Org bullets
@@ -349,6 +353,8 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
       (cons 'remote-file-error debug-ignored-errors))
   )
 #+end_src
+
+#+RESULTS:
 
 * Permanently display workspaces minibuffer
 #+begin_src elisp

@@ -77,8 +77,8 @@
 
 (menu-bar-mode t)
 
-;; for emacs GUI
-(add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+;; Enable true fullscreen mode on startup
+(add-hook 'emacs-startup-hook #'toggle-frame-fullscreen)
 
 (setq confirm-kill-emacs nil)
 
@@ -122,7 +122,11 @@
 
 (xterm-mouse-mode 1)
 
-(setq blink-cursor-mode 0)
+;; Enable cursor blinking indefinitely
+(setq blink-cursor-mode t
+      blink-cursor-interval 0.5  ; Time (in seconds) between blinks
+      blink-cursor-delay 0.0)    ; No delay before blinking starts
+(blink-cursor-mode 1)          ; Activate cursor blinking
 
 (use-package org-bullets
   :custom
