@@ -168,7 +168,6 @@ This allows emacs to replace the selected text upon paste.
 
 * Disable flyspell mode globally by default
 #+begin_src elisp
-(setq ispell-program-name nil)
 (setq-default flyspell-mode nil)
 #+end_src
 
@@ -276,16 +275,16 @@ These are * in *bold*, / in /italic/ etc.
 
 * Abaqus major mode
 #+begin_src elisp
-(load! "~/.config/doom/emacs_modes/abaqus.el")
-(add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
+(with-eval-after-load 'abaqus
+  (add-hook 'abaqus-mode-hook 'turn-on-font-lock))
 #+end_src
 
 * LS-DYNA major mode
 #+begin_src elisp
-(load! "~/.config/doom/emacs_modes/lsdyna.el")
-(add-hook 'lsdyna-mode-hook 'turn-on-font-lock)
 (autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
+(with-eval-after-load 'lsdyna
+  (add-hook 'lsdyna-mode-hook 'turn-on-font-lock))
 #+end_src
 
 * Jump from src code to org file src block
