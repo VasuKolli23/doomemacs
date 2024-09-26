@@ -54,7 +54,5 @@
 (package! org-bullets)
 (package! csv-mode)
 (package! gnuplot)
-;; auctex problem
-(package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
-;; auctex fragtog but asynchronous - https://github.com/dandavison/xenops
-(package! xenops)
+;; llm package
+(package! ellama)

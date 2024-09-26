@@ -78,7 +78,7 @@
 (menu-bar-mode t)
 
 ;; Enable true fullscreen mode on startup
-(add-hook 'emacs-startup-hook #'toggle-frame-fullscreen)
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (setq confirm-kill-emacs nil)
 
@@ -263,30 +263,23 @@
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
 
-(after! tex
-(setq font-latex-fontify-script nil)
-(setq pretty-symbols-mode nil))
-
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil) ;; asks for master file
-
-;; Ensure PDF Tools is loaded and configured
-(after! pdf-tools
-  (add-hook 'TeX-after-compilation-finished-functions
-            #'TeX-revert-document-buffer))
-
-;; Configure AUCTeX to use PDF Tools
-(after! tex
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-        TeX-source-correlate-start-server t
-        TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))))
-
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(after! tex
-(setq reftex-plug-into-auctex t))
-
-;; (add-hook 'LaTeX-mode-hook 'xenops-mode)
-;; (after! tex
-;; (setq xenops-math-image-scale-factor 1.25)
-;; (setq xenops-reveal-on-entry t))
+(use-package ellama
+  :init
+  (setopt ellama-keymap-prefix "C-c e")
+  (require 'llm-ollama)
+  ;; language you want ellama to translate to
+  (setopt ellama-language "English")
+  ;; Set the default provider to use llama3.1:latest
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "llama3.1:latest"
+           :embedding-model "nomic-embed-text"))
+  ;; Add other models (mixtral and codellama) to the provider list
+  (setopt ellama-providers
+          '(("llama3.1" . (make-llm-ollama
+                           :chat-model "llama3.1:latest"
+                           :embedding-model "nomic-embed-text"))
+            ("mixtral" . (make-llm-ollama
+                          :chat-model "mixtral:latest"))
+            ("codellama" . (make-llm-ollama
+                            :chat-model "codellama:latest")))))
