@@ -133,9 +133,12 @@
   (org-ellipsis "⤵")
   :hook (org-mode . org-bullets-mode))
 
+(after! org
+  (add-hook 'org-mode-hook #'org-num-mode))
+
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
-(setq org-hide-emphasis-markers t)
+;; (setq org-hide-emphasis-markers t)
 
 (setq org-startup-with-latex-preview t)
 

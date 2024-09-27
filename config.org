@@ -20,6 +20,8 @@
 - [[#mouse-support-for-terminal-version][Mouse support for terminal version]]
 - [[#cursor-blinking][Cursor blinking]]
 - [[#org-bullets][Org bullets]]
+  - [[#setting-bullet-symbols][Setting bullet symbols]]
+  - [[#showing-numbers-for-org-headings][Showing numbers for org headings]]
 - [[#org-see-latex-fragments][Org see latex fragments]]
 - [[#hide-org-mode-emphasis-markers][Hide org mode emphasis markers]]
 - [[#latex-equation-preview-on-startup][LaTeX equation preview on startup]]
@@ -222,6 +224,7 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 #+end_src
 
 * Org bullets
+** Setting bullet symbols
 #+begin_src elisp
 (use-package org-bullets
   :custom
@@ -229,7 +232,11 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
   (org-ellipsis "⤵")
   :hook (org-mode . org-bullets-mode))
 #+end_src
-
+** Showing numbers for org headings
+#+begin_src elisp
+(after! org
+  (add-hook 'org-mode-hook #'org-num-mode))
+#+end_src
 * Org see latex fragments
 #+begin_src elisp
 (add-hook 'org-mode-hook 'org-fragtog-mode)
@@ -238,7 +245,7 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 * Hide org mode emphasis markers
 These are * in *bold*, / in /italic/ etc.
 #+begin_src elisp
-(setq org-hide-emphasis-markers t)
+;; (setq org-hide-emphasis-markers t)
 #+end_src
 
 * LaTeX equation preview on startup
