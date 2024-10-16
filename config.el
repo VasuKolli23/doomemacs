@@ -138,7 +138,7 @@
 
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
-;; (setq org-hide-emphasis-markers t)
+(setq org-hide-emphasis-markers t)
 
 (setq org-startup-with-latex-preview t)
 
@@ -157,13 +157,13 @@
   (setq org-src-window-setup 'split-window-right)
   (set-popup-rule! "^\\*Org Src" :ignore t))
 
+(load! "~/.config/doom/emacs_modes/abaqus.el")
+(add-hook 'abaqus-mode-hook 'turn-on-font-lock)
 (autoload 'abaqus-mode "abaqus" "Enter abaqus mode." t)
-(with-eval-after-load 'abaqus
-  (add-hook 'abaqus-mode-hook 'turn-on-font-lock))
 
+(load! "~/.config/doom/emacs_modes/lsdyna.el")
+(add-hook 'lsdyna-mode-hook 'turn-on-font-lock)
 (autoload 'lsdyna-mode "lsdyna" "Enter lsdyna mode." t)
-(with-eval-after-load 'lsdyna
-  (add-hook 'lsdyna-mode-hook 'turn-on-font-lock))
 
 (defadvice org-babel-tangle-jump-to-org (after recenter activate)
   (recenter))
