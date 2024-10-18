@@ -228,8 +228,8 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 #+begin_src elisp
 (use-package org-bullets
   :custom
-  (org-bullets-bullet-list '("☯" "◉" "○" "✿" "◆" "✜" "✸" ))
-  (org-ellipsis "⤵")
+  (org-bullets-bullet-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸" ))
+  (org-ellipsis "⤋")
   :hook (org-mode . org-bullets-mode))
 #+end_src
 ** Showing numbers for org headings
@@ -296,7 +296,6 @@ These are * in *bold*, / in /italic/ etc.
 
 * Jump from src code to org file src block
 We can jump from a particular line in org mode tangled source file to the corresponding org mode src block line using the function org-babel-tangle-jump-to-org. But the cursor is at the bottom of the screen. Now we change it to the center.
-
 #+begin_src elisp
 (defadvice org-babel-tangle-jump-to-org (after recenter activate)
   (recenter))

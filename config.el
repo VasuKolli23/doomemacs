@@ -129,8 +129,8 @@
 
 (use-package org-bullets
   :custom
-  (org-bullets-bullet-list '("☯" "◉" "○" "✿" "◆" "✜" "✸" ))
-  (org-ellipsis "⤵")
+  (org-bullets-bullet-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸" ))
+  (org-ellipsis "⤋")
   :hook (org-mode . org-bullets-mode))
 
 (after! org
