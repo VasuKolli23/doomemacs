@@ -265,23 +265,18 @@
       :desc "dap breakpoint hit count"   "h" #'dap-breakpoint-hit-condition
       :desc "dap breakpoint log message" "l" #'dap-breakpoint-log-message)
 
-(use-package ellama
-  :init
-  (setopt ellama-keymap-prefix "C-c e")
-  (require 'llm-ollama)
-  ;; language you want ellama to translate to
-  (setopt ellama-language "English")
-  ;; Set the default provider to use llama3.1:latest
-  (setopt ellama-provider
-          (make-llm-ollama
-           :chat-model "llama3.1:latest"
-           :embedding-model "nomic-embed-text"))
-  ;; Add other models (mixtral and codellama) to the provider list
-  (setopt ellama-providers
-          '(("llama3.1" . (make-llm-ollama
-                           :chat-model "llama3.1:latest"
-                           :embedding-model "nomic-embed-text"))
-            ("mixtral" . (make-llm-ollama
-                          :chat-model "mixtral:latest"))
-            ("codellama" . (make-llm-ollama
-                            :chat-model "codellama:latest")))))
+;; setting default gptel mode
+(setq! gptel-default-mode 'org-mode)
+
+(gptel-make-ollama "Ollama"             ;Any name of your choosing
+  :host "localhost:11434"               ;Where it's running
+  :stream t                             ;Stream responses
+  :models '(qwen2.5-coder:latest, qwen2.5:latest, llama3.2:latest, mixtral:latest))          ;List of models
+
+;; OPTIONAL configuration
+(setq
+ gptel-model 'qwen2.5:latest
+ gptel-backend (gptel-make-ollama "Ollama"
+                 :host "localhost:11434"
+                 :stream t
+                 :models '(qwen2.5:latest)))
