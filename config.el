@@ -271,11 +271,11 @@
 (gptel-make-ollama "Ollama"             ;Any name of your choosing
   :host "localhost:11434"               ;Where it's running
   :stream t                             ;Stream responses
-  :models '(qwen2.5-coder:latest, qwen2.5:latest, llama3.2:latest, mixtral:latest))          ;List of models
+  :models '(qwen2.5:14b, qwen2.5-coder:latest, qwen2.5:latest, llama3.2:latest, mixtral:latest))          ;List of models
 
 ;; OPTIONAL configuration
 (setq
- gptel-model 'qwen2.5:latest
+ gptel-model 'qwen2.5:14b
  gptel-backend (gptel-make-ollama "Ollama"
                  :host "localhost:11434"
                  :stream t
