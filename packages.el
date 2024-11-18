@@ -51,9 +51,6 @@
 (package! org-fragtog)
 (package! beacon)
 (package! org-auto-tangle)
-(package! org-bullets)
-(package! csv-mode)
-(package! gnuplot)
 ;; auctex problem
 (package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
 ;; llm package

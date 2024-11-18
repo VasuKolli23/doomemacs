@@ -87,7 +87,7 @@
 (beacon-mode 1)
 
 ;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -127,11 +127,7 @@
       blink-cursor-delay 0.0)    ; No delay before blinking starts
 (blink-cursor-mode 1)          ; Activate cursor blinking
 
-(use-package org-bullets
-  :custom
-  (org-bullets-bullet-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸" ))
-  (org-ellipsis "⤋")
-  :hook (org-mode . org-bullets-mode))
+(setq org-superstar-headline-bullets-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸"))
 
 (after! org
   (add-hook 'org-mode-hook #'org-num-mode))

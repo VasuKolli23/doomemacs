@@ -22,6 +22,7 @@
 - [[#org-bullets][Org bullets]]
   - [[#setting-bullet-symbols][Setting bullet symbols]]
   - [[#showing-numbers-for-org-headings][Showing numbers for org headings]]
+- [[#org-unordered-list-bullet-style][Org unordered list bullet style]]
 - [[#org-see-latex-fragments][Org see latex fragments]]
 - [[#hide-org-mode-emphasis-markers][Hide org mode emphasis markers]]
 - [[#latex-equation-preview-on-startup][LaTeX equation preview on startup]]
@@ -156,7 +157,7 @@
 * Fonts
 #+BEGIN_SRC elisp
 ;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -229,17 +230,17 @@ Usually the cursor blinks for 10 times and if there is no input it stops blinkin
 * Org bullets
 ** Setting bullet symbols
 #+begin_src elisp
-(use-package org-bullets
-  :custom
-  (org-bullets-bullet-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸" ))
-  (org-ellipsis "⤋")
-  :hook (org-mode . org-bullets-mode))
+(setq org-superstar-headline-bullets-list '("ↂ" "۞" "㈣" "◉" "○" "◆" "✜" "✸"))
 #+end_src
 ** Showing numbers for org headings
 #+begin_src elisp
 (after! org
   (add-hook 'org-mode-hook #'org-num-mode))
 #+end_src
+
+* Org unordered list bullet style
+TODO
+
 * Org see latex fragments
 #+begin_src elisp
 (add-hook 'org-mode-hook 'org-fragtog-mode)
@@ -308,7 +309,6 @@ We can jump from a particular line in org mode tangled source file to the corres
 #+begin_src elisp
   (setq org-export-preserve-breaks t)
 #+end_src
-
 
 * Disabling auto fill in org mode
 #+begin_src elisp
