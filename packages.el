@@ -49,9 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
                                         ;(unpin! t)
 (package! org-fragtog)
-(package! beacon)
 (package! org-auto-tangle)
-;; auctex problem
-(package! auctex :pin "86b2397abdc20a638e5751251026727bc6282022")
 ;; llm package
 (package! gptel)

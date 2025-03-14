@@ -84,10 +84,10 @@
 
 (setq-default line-spacing 2)
 
-(beacon-mode 1)
-
-;; (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
+;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -267,7 +267,7 @@
 (gptel-make-ollama "Ollama"             ;Any name of your choosing
   :host "localhost:11434"               ;Where it's running
   :stream t                             ;Stream responses
-  :models '(qwen2.5:14b, qwen2.5-coder:latest, qwen2.5:latest, llama3.2:latest, mixtral:latest))          ;List of models
+  :models '(qwen2.5:14b, qwen2.5-coder:latest, qwen2.5:latest, llama3.2:latest))          ;List of models
 
 ;; OPTIONAL configuration
 (setq
