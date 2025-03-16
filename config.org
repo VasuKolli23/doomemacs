@@ -11,7 +11,9 @@
 - [[#fonts][Fonts]]
 - [[#delete-selection-mode][Delete selection mode]]
 - [[#disable-flyspell-mode-globally-by-default][Disable flyspell mode globally by default]]
-- [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
+- [[#dired-customizations][Dired customizations]]
+  - [[#dired-infinite-buffers-disable][Dired infinite buffers disable]]
+  - [[#dired-async-mode-on-by-default][Dired async mode on by default]]
 - [[#org-auto-tangle][Org auto tangle]]
 - [[#org-noter-settings][Org noter settings]]
 - [[#toggle-truncate-lines][Toggle truncate lines]]
@@ -173,11 +175,16 @@ This allows emacs to replace the selected text upon paste.
 (setq-default flyspell-mode nil)
 #+end_src
 
-* Dired infinite buffers disable
+* Dired customizations
+** Dired infinite buffers disable
 #+begin_src elisp
 (setq dired-kill-when-opening-new-dired-buffer t)
 #+end_src
 
+** Dired async mode on by default
+#+begin_src elisp
+(setq dired-async-mode t)
+#+end_src
 * Org auto tangle
 #+BEGIN_SRC elisp
 (use-package! org-auto-tangle
