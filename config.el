@@ -82,6 +82,8 @@
 
 (setq confirm-kill-emacs nil)
 
+(setq fancy-splash-image "~/.config/doom/emacs.svg")
+
 (setq-default line-spacing 2)
 
 ;; (setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
@@ -210,6 +212,8 @@
       (insert (+workspace--tabline))))
   (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
   (+workspace/display))
+
+
 
 (defun vasu/revert-and-center-last-line ()
   "Revert the current buffer, go to the last line, and center the view."

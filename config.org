@@ -7,6 +7,7 @@
 - [[#display-menu-bar][Display menu bar]]
 - [[#full-screen-on-startup][Full screen on startup]]
 - [[#quit-emacs-without-confirmation][Quit emacs without confirmation]]
+- [[#emacs-splash-screen-image][Emacs splash screen image]]
 - [[#line-height][Line height]]
 - [[#fonts][Fonts]]
 - [[#delete-selection-mode][Delete selection mode]]
@@ -39,6 +40,8 @@
 - [[#toggle-evil-mode][Toggle evil mode]]
 - [[#tramp-config][TRAMP config]]
 - [[#permanently-display-workspaces-minibuffer][Permanently display workspaces minibuffer]]
+- [[#auctex][Auctex]]
+  - [[#disable-project-prompt][Disable project prompt]]
 - [[#revert-buffer-and-centering][Revert buffer and centering]]
 - [[#gnuplot-mode-for-gp-files][Gnuplot mode for .gp files]]
 - [[#python][Python]]
@@ -143,6 +146,11 @@
 * Quit emacs without confirmation
 #+begin_src elisp
 (setq confirm-kill-emacs nil)
+#+end_src
+
+* Emacs splash screen image
+#+begin_src elisp
+(setq fancy-splash-image "~/.config/doom/emacs.svg")
 #+end_src
 
 * Line height
@@ -370,6 +378,11 @@ Default TRAMP is too slow. Learnt from https://www.gnu.org/software/emacs/manual
       (insert (+workspace--tabline))))
   (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
   (+workspace/display))
+#+end_src
+
+* Auctex
+** TODO Disable project prompt
+#+begin_src elisp
 #+end_src
 
 * Revert buffer and centering
