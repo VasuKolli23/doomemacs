@@ -4,7 +4,6 @@
 
 * Table of contents :toc:
 - [[#default-lines][Default lines]]
-- [[#display-menu-bar][Display menu bar]]
 - [[#full-screen-on-startup][Full screen on startup]]
 - [[#quit-emacs-without-confirmation][Quit emacs without confirmation]]
 - [[#emacs-splash-screen-image][Emacs splash screen image]]
@@ -132,11 +131,6 @@
 ;; they are implemented.
 #+END_SRC
 
-* Display menu bar
-#+begin_src elisp
-(menu-bar-mode t)
-#+end_src
-
 * Full screen on startup
 #+begin_src elisp
 ;; Enable true fullscreen mode on startup
@@ -150,7 +144,7 @@
 
 * Emacs splash screen image
 #+begin_src elisp
-(setq fancy-splash-image "~/.config/doom/emacs.svg")
+(setq fancy-splash-image "/home/vasu/.config/doom/emacs.svg")
 #+end_src
 
 * Line height

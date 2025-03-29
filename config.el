@@ -75,14 +75,12 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(menu-bar-mode t)
-
 ;; Enable true fullscreen mode on startup
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (setq confirm-kill-emacs nil)
 
-(setq fancy-splash-image "~/.config/doom/emacs.svg")
+(setq fancy-splash-image "/home/vasu/.config/doom/emacs.svg")
 
 (setq-default line-spacing 2)
 
