@@ -82,7 +82,7 @@
 
 (setq-default line-spacing 3)
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
       doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 14)
       doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 22))
 (after! doom-themes
