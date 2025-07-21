@@ -50,5 +50,3 @@
                                         ;(unpin! t)
 (package! org-fragtog)
 (package! org-auto-tangle)
-;; llm package
-(package! gptel)
